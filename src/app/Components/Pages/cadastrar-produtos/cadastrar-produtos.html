@@ -1,0 +1,52 @@
+<form class="mt-2" [formGroup]="formulario" (ngSubmit)="cadastrar()">
+    <div class="mb-2">
+        <label>Nome do produto</label>
+        <input type="text" class="form-control" formControlName="nome" />
+
+         <div class="text-danger"
+            *ngIf="formulario.get('nome')?.touched && formulario.get('nome')?.invalid"
+        >
+            Por favor, informe um nome com no mínimo 8 caracteres.
+        </div>
+    </div>
+
+    <div class="mb-2">
+        <label>Preço</label>
+        <input type="text" class="form-control" formControlName="preco" />
+
+         <div class="text-danger"
+            *ngIf="formulario.get('preco')?.touched && formulario.get('preco')?.invalid"
+        >
+            Por favor, informe o preço do produto com o valor mínimo se 0.01
+        </div>        
+    </div>
+
+    <div class="mb-2">
+        <label>Quantidade</label>
+        <input type="text" class="form-control" formControlName="quantidade" />
+         <div class="text-danger"
+            *ngIf="formulario.get('quantidade')?.touched && formulario.get('quantidade')?.invalid"
+        >
+            Por favor, informe a quantidade do produto com valor mínimo 1
+        </div>
+    </div>
+    <div class="mb-2">
+        <label>Selecione a ategoria</label>
+        <select class="form-select" formControlName="categoriaId">
+            <option value="form-select">Escolha uma opção</option>
+            <option *ngFor="let c of Categorias()" value="{{ c.id }}">
+                {{ c.nome }}
+            </option>
+        </select>
+        <div class="text-danger"
+            *ngIf="formulario.get('categoriaId')?.touched && formulario.get('categoriaId')?.invalid"
+        >
+            Por favor, selecione a categria do produto
+        </div>
+
+        <div class="mb-2">
+            <input type="submit" class="btn btn-success" value="Realizar Cadastro" [disabled]="formulario.invalid" />
+        </div>
+
+    </div>
+</form>

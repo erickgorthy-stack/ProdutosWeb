@@ -1,0 +1,18 @@
+<form [formGroup]="formulario" (ngSubmit)="consultar()">
+
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Digite o nome do produto"
+                formControlName="nome"/>
+            <div class="text-danger" *ngIf="formulario.get('nome')?.invalid && formulario.get('nome')?.touched">
+                Nome do produto é obrigatório e deve ter pelo menos 3 caracteres.
+            </div>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">
+                Realizar Pesquisa
+            </button>
+        </div>
+    </div>
+
+</form>
