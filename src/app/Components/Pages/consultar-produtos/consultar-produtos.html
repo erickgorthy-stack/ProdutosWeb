@@ -2,8 +2,7 @@
 
     <div class="row">
         <div class="col">
-            <input type="text" class="form-control" placeholder="Digite o nome do produto"
-                formControlName="nome"/>
+            <input type="text" class="form-control" placeholder="Digite o nome do produto" formControlName="nome" />
             <div class="text-danger" *ngIf="formulario.get('nome')?.invalid && formulario.get('nome')?.touched">
                 Nome do produto é obrigatório e deve ter pelo menos 3 caracteres.
             </div>
@@ -16,3 +15,38 @@
     </div>
 
 </form>
+<div class="mt-2">
+    <table class="table table-sm table-hover">
+        <thead>
+            <tr>
+                <th>Nome do produto</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Total</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of produtos()">
+                <td>{{ p.nome | uppercase }}</td>
+                <td>{{ p.preco | currency: 'CAD' }}</td>
+                <td>{{ p.quantidade }}</td>
+                <td>{{ p.preco * p.quantidade | currency: 'CAD' }}</td>
+                <td>{{ p.categoria.nome | uppercase }}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary me-1">Editar</button>
+                    <button class="btn btn-sm btn-outline-danger me-1">Excluir</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6">
+                    Quantidade de produtos: {{ produtos().length}}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
